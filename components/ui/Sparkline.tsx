@@ -60,18 +60,24 @@ export function BarChart({
   height = 160,
 }: BarChartProps) {
   const max = Math.max(...values, 1);
+  const labelHeight = 16;
+  const usableHeight = height - labelHeight;
   return (
     <div className="w-full">
       <div className="flex items-end gap-2" style={{ height }}>
         {values.map((v, i) => {
-          const h = Math.round((v / max) * 100);
+          const barH = Math.max(2, Math.round((v / max) * usableHeight));
           const isLast = highlightLast && i === values.length - 1;
           return (
             <div
               key={i}
               className="flex-1 flex flex-col items-center justify-end group"
+              style={{ height }}
             >
-              <div className="text-[10px] text-slate-500 mb-1 tabular-nums">
+              <div
+                className="text-[10px] text-slate-500 tabular-nums leading-none mb-1"
+                style={{ height: labelHeight }}
+              >
                 {v}
               </div>
               <div
@@ -80,7 +86,7 @@ export function BarChart({
                     ? "bg-slate-900"
                     : "bg-slate-300 group-hover:bg-slate-400"
                 }`}
-                style={{ height: `${h}%` }}
+                style={{ height: barH }}
               />
             </div>
           );

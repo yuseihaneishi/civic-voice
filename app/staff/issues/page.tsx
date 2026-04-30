@@ -56,29 +56,35 @@ export default function StaffIssuesPage() {
 
       <Card padded={false}>
         <div className="px-5 py-3 border-b border-slate-200 bg-slate-50/50 flex flex-wrap items-center gap-2">
-          <Select
-            value={category}
-            onChange={(e) => setCategory(e.target.value as "all" | Category)}
-            className="text-sm h-9 w-44"
-          >
-            <option value="all">すべての分野</option>
-            {categories.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </Select>
-          <Select
-            value={sort}
-            onChange={(e) =>
-              setSort(e.target.value as "priority" | "count" | "trend")
-            }
-            className="text-sm h-9 w-44"
-          >
-            <option value="priority">優先度順</option>
-            <option value="count">件数順</option>
-            <option value="trend">トレンド順</option>
-          </Select>
+          <div className="w-48">
+            <Select
+              value={category}
+              onChange={(e) =>
+                setCategory(e.target.value as "all" | Category)
+              }
+              className="text-sm h-9"
+            >
+              <option value="all">すべての分野</option>
+              {categories.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </Select>
+          </div>
+          <div className="w-44">
+            <Select
+              value={sort}
+              onChange={(e) =>
+                setSort(e.target.value as "priority" | "count" | "trend")
+              }
+              className="text-sm h-9"
+            >
+              <option value="priority">優先度順</option>
+              <option value="count">件数順</option>
+              <option value="trend">トレンド順</option>
+            </Select>
+          </div>
           <span className="ml-auto text-xs text-slate-500">
             {filtered.length} 件
           </span>
