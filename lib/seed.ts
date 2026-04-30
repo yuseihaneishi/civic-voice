@@ -404,7 +404,7 @@ export const seedIssues: Issue[] = [
       "FAQをもっと充実させてください",
     ],
     relatedIssueIds: ["ISS-004"],
-    weeklySeries: [4, 5, 6, 8, 9, 12, 18, 27],
+    weeklySeries: [3, 3, 4, 4, 5, 5, 6, 8, 9, 12, 18, 27],
     status: "検討中",
     decisionLog: [],
     comments: [
@@ -450,7 +450,7 @@ export const seedIssues: Issue[] = [
       "公園の遊具が老朽化しており、塗装の剥がれが目立ちます",
     ],
     relatedIssueIds: [],
-    weeklySeries: [2, 3, 3, 4, 4, 6, 8, 14],
+    weeklySeries: [1, 2, 2, 3, 3, 3, 4, 4, 6, 8, 11, 14],
     status: "検討中",
     decisionLog: [],
     comments: [
@@ -489,7 +489,7 @@ export const seedIssues: Issue[] = [
       "保育園入所の申請書類が紙のみで、共働きで提出に行く時間が取れない",
     ],
     relatedIssueIds: [],
-    weeklySeries: [3, 3, 4, 5, 6, 8, 9, 11],
+    weeklySeries: [2, 2, 3, 3, 3, 4, 5, 6, 8, 9, 10, 11],
     status: "検討中",
     decisionLog: [],
     comments: [
@@ -528,7 +528,7 @@ export const seedIssues: Issue[] = [
       "介護関連で市民税課と高齢福祉課に別々に書類を出す必要がある",
     ],
     relatedIssueIds: ["ISS-001"],
-    weeklySeries: [1, 1, 2, 3, 4, 5, 7, 9],
+    weeklySeries: [0, 0, 1, 1, 1, 2, 3, 4, 5, 6, 7, 9],
     status: "検討中",
     decisionLog: [],
     comments: [
@@ -580,7 +580,7 @@ export const seedIssues: Issue[] = [
       "ごみ収集日の祝日対応が変更になっていることを知らず、収集されない",
     ],
     relatedIssueIds: [],
-    weeklySeries: [3, 3, 4, 4, 4, 5, 5, 6],
+    weeklySeries: [4, 4, 5, 5, 4, 4, 4, 5, 5, 6, 5, 6],
     status: "検討中",
     decisionLog: [],
     comments: [
@@ -608,7 +608,7 @@ export const seedIssues: Issue[] = [
     proposal: "①来庁者数のピーク時間案内、②予約来庁制度の試行。",
     citizenVoices: ["駐車場が混雑しており、毎回時間がかかる"],
     relatedIssueIds: ["ISS-003"],
-    weeklySeries: [2, 2, 3, 3, 3, 4, 4, 5],
+    weeklySeries: [3, 3, 3, 4, 3, 3, 3, 4, 4, 4, 4, 5],
     status: "検討中",
     decisionLog: [],
   },
@@ -628,13 +628,17 @@ export const seedIssues: Issue[] = [
       "①更新フローの再設計、②町内会・商店街との情報連携、③簡易CMSの導入。",
     citizenVoices: ["観光案内のWebページが古く、市内の祭事情報も最新ではない"],
     relatedIssueIds: [],
-    weeklySeries: [2, 2, 3, 3, 3, 3, 4, 4],
+    weeklySeries: [2, 2, 3, 3, 2, 3, 3, 3, 3, 3, 4, 4],
     status: "検討中",
     decisionLog: [],
   },
 ];
 
 export const weeklySeriesLabels = [
+  "2/9週",
+  "2/16週",
+  "2/23週",
+  "3/2週",
   "3/9週",
   "3/16週",
   "3/23週",

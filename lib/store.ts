@@ -81,7 +81,7 @@ const defaultStaffFilters: StaffFilters = {
   sortBy: "date_desc",
 };
 
-const STORAGE_KEY = "civic-voice-store-v3";
+const STORAGE_KEY = "civic-voice-store-v4";
 
 export const useStore = create<AppState>()(
   persist(
