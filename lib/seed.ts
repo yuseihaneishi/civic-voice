@@ -57,6 +57,8 @@ export const seedLetters: Letter[] = [
     category: "子育て・教育",
     department: "子ども若者部",
     priority: "高",
+    aiPriorityReason:
+      "子育て世帯全体に関わる制度要望で、同種の意見が今月32件と急増しているため",
     replyRequired: true,
     status: "新着",
     isFresh: true,
@@ -87,6 +89,8 @@ export const seedLetters: Letter[] = [
     category: "道路・交通",
     department: "土木交通部",
     priority: "高",
+    aiPriorityReason:
+      "通院手段の喪失という生活への影響が大きく、放置すると深刻化する個別事情を含むため",
     replyRequired: true,
     status: "新着",
     isFresh: true,
@@ -116,6 +120,8 @@ export const seedLetters: Letter[] = [
     category: "防災・安全",
     department: "防災危機管理局",
     priority: "中",
+    aiPriorityReason:
+      "災害時の安全に関わるものの、恒常的な改善提案であり直近の危険性は低いため",
     replyRequired: true,
     status: "新着",
     isFresh: true,
@@ -145,6 +151,8 @@ export const seedLetters: Letter[] = [
     category: "道路・交通",
     department: "土木交通部",
     priority: "中",
+    aiPriorityReason:
+      "事故リスクの指摘だが具体的な被害報告はなく、計画的な対応が可能なため",
     replyRequired: true,
     status: "新着",
     isFresh: true,
@@ -175,6 +183,8 @@ export const seedLetters: Letter[] = [
     category: "環境・琵琶湖",
     department: "琵琶湖環境部",
     priority: "中",
+    aiPriorityReason:
+      "生活環境への影響が継続中で同種意見も多いが、人身への危険はないため",
     replyRequired: true,
     status: "振り分け済",
     log: [
@@ -208,6 +218,8 @@ export const seedLetters: Letter[] = [
     category: "子育て・教育",
     department: "教育委員会",
     priority: "中",
+    aiPriorityReason:
+      "説明機会の改善要望であり、開催方法の見直しで対応可能なため",
     replyRequired: true,
     status: "振り分け済",
     log: [
@@ -241,6 +253,8 @@ export const seedLetters: Letter[] = [
     category: "医療・福祉",
     department: "健康医療福祉部",
     priority: "中",
+    aiPriorityReason:
+      "高齢者の負担軽減に関わるが、緊急対応を要する事案ではないため",
     replyRequired: true,
     status: "振り分け済",
     log: [
@@ -274,6 +288,8 @@ export const seedLetters: Letter[] = [
     category: "産業・観光",
     department: "商工観光労働部",
     priority: "低",
+    aiPriorityReason:
+      "中長期的な支援制度の改善要望であり、即時対応の必要性は低いため",
     replyRequired: true,
     status: "振り分け済",
     log: [
@@ -308,6 +324,8 @@ export const seedLetters: Letter[] = [
     category: "道路・交通",
     department: "土木交通部",
     priority: "高",
+    aiPriorityReason:
+      "児童の安全に直結し、危険箇所が具体的に特定されているため",
     replyRequired: true,
     status: "回答案作成中",
     draft: {
@@ -352,6 +370,8 @@ export const seedLetters: Letter[] = [
     category: "子育て・教育",
     department: "子ども若者部",
     priority: "中",
+    aiPriorityReason:
+      "制度運用の改善要望で、運営主体の市町との調整を要するため",
     replyRequired: true,
     status: "回答案作成中",
     draft: {
@@ -392,6 +412,8 @@ export const seedLetters: Letter[] = [
     category: "防災・安全",
     department: "防災危機管理局",
     priority: "高",
+    aiPriorityReason:
+      "人身被害につながる恐れがあり、通学路への近接など緊急性が高いため",
     replyRequired: true,
     status: "決裁待ち",
     draft: {
@@ -442,6 +464,8 @@ export const seedLetters: Letter[] = [
     category: "産業・観光",
     department: "商工観光労働部",
     priority: "中",
+    aiPriorityReason:
+      "生活への影響はあるが季節性の課題であり、計画的な対策が可能なため",
     replyRequired: true,
     status: "回答済",
     draft: {
@@ -493,6 +517,8 @@ export const seedLetters: Letter[] = [
     category: "県政運営・手続",
     department: "総合企画部",
     priority: "低",
+    aiPriorityReason:
+      "案内改善の提案であり、緊急性・影響範囲ともに限定的なため",
     replyRequired: true,
     status: "回答済",
     draft: {
@@ -544,6 +570,8 @@ export const seedLetters: Letter[] = [
     category: "環境・琵琶湖",
     department: "琵琶湖環境部",
     priority: "低",
+    aiPriorityReason:
+      "感謝の声であり、対応の緊急性はないため",
     replyRequired: false,
     status: "回答不要",
     log: [
@@ -580,6 +608,8 @@ export const incomingPool: Omit<Letter, "receivedAt" | "log" | "isFresh">[] = [
     category: "子育て・教育",
     department: "子ども若者部",
     priority: "中",
+    aiPriorityReason:
+      "来年度に向けた制度要望で、対応を検討する時間的余裕があるため",
     replyRequired: true,
     status: "新着",
   },
@@ -600,6 +630,8 @@ export const incomingPool: Omit<Letter, "receivedAt" | "log" | "isFresh">[] = [
     category: "道路・交通",
     department: "土木交通部",
     priority: "中",
+    aiPriorityReason:
+      "夜間の安全に関わるが事故報告はなく、計画的な対応が可能なため",
     replyRequired: true,
     status: "新着",
   },
@@ -620,6 +652,8 @@ export const incomingPool: Omit<Letter, "receivedAt" | "log" | "isFresh">[] = [
     category: "医療・福祉",
     department: "健康医療福祉部",
     priority: "高",
+    aiPriorityReason:
+      "サービス縮小の可能性への言及があり、現場からの緊急性の高い訴えのため",
     replyRequired: true,
     status: "新着",
   },
@@ -640,6 +674,8 @@ export const incomingPool: Omit<Letter, "receivedAt" | "log" | "isFresh">[] = [
     category: "産業・観光",
     department: "商工観光労働部",
     priority: "低",
+    aiPriorityReason:
+      "中長期的な環境整備の提案であり、緊急性は低いため",
     replyRequired: true,
     status: "新着",
   },

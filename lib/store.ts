@@ -19,6 +19,7 @@ type AppState = {
   generateDraft: (id: string) => void;
   saveDraft: (id: string, body: string) => void;
   requestApproval: (id: string) => void;
+  returnDraft: (id: string, reason: string) => void;
   sendReply: (id: string) => void;
   markNoReply: (id: string) => void;
   simulateIncoming: () => void;
@@ -148,6 +149,8 @@ export const useStore = create<AppState>()(
                     draft: {
                       ...l.draft,
                       approvalRequestedAt: formatDateTime(),
+                      returnedAt: undefined,
+                      returnReason: undefined,
                     },
                   },
                   "決裁を依頼（広報課長）",
@@ -159,6 +162,36 @@ export const useStore = create<AppState>()(
           tone: "info",
           title: "決裁を依頼しました",
           description: "広報課長の決裁後に回答を送付できます",
+        });
+      },
+
+      returnDraft: (id, reason) => {
+        const trimmed = reason.trim();
+        set((state) => ({
+          letters: state.letters.map((l) =>
+            l.id === id && l.draft
+              ? appendLog(
+                  {
+                    ...l,
+                    status: "差し戻し" as LetterStatus,
+                    draft: {
+                      ...l.draft,
+                      returnedAt: formatDateTime(),
+                      returnReason: trimmed || undefined,
+                    },
+                  },
+                  trimmed
+                    ? `決裁を差し戻し（理由：${trimmed}）`
+                    : "決裁を差し戻し（回答案の修正へ）",
+                  "広報課長",
+                )
+              : l,
+          ),
+        }));
+        get().pushToast({
+          tone: "warn",
+          title: "差し戻しました",
+          description: "担当職員が理由を確認し、回答案を修正できます",
         });
       },
 

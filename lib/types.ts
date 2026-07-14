@@ -25,6 +25,7 @@ export type LetterStatus =
   | "振り分け済"
   | "回答案作成中"
   | "決裁待ち"
+  | "差し戻し"
   | "回答済"
   | "回答不要";
 
@@ -45,6 +46,9 @@ export type ReplyDraft = {
   edited: boolean;
   approvalRequestedAt?: string;
   sentAt?: string;
+  /** 決裁者による差し戻し（再依頼でクリアされる） */
+  returnedAt?: string;
+  returnReason?: string;
 };
 
 export type Letter = {
@@ -63,6 +67,8 @@ export type Letter = {
   category: Category;
   department: Department;
   priority: Priority;
+  /** AIが優先度を判定した根拠 */
+  aiPriorityReason?: string;
   replyRequired: boolean;
   status: LetterStatus;
   draft?: ReplyDraft;

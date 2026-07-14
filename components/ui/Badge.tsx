@@ -65,6 +65,7 @@ const statusTones: Record<LetterStatus, Tone> = {
   振り分け済: "neutral",
   回答案作成中: "info",
   決裁待ち: "warn",
+  差し戻し: "alert",
   回答済: "success",
   回答不要: "muted",
 };

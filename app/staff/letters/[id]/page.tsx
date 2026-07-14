@@ -213,6 +213,12 @@ function LetterDetail({ letter }: { letter: Letter }) {
                     </option>
                   ))}
                 </Select>
+                {letter.aiPriorityReason && (
+                  <p className="mt-1.5 text-xs text-slate-500 leading-relaxed">
+                    <span className="text-slate-400">AIの判定根拠：</span>
+                    {letter.aiPriorityReason}
+                  </p>
+                )}
               </Field>
               {letter.status === "新着" && (
                 <div className="pt-1 flex flex-col gap-2">
@@ -286,8 +292,24 @@ function DraftEditor({ letter }: { letter: Letter }) {
   const [draftBody, setDraftBody] = useState(draft.body);
   const draftDirty = draftBody !== draft.body;
 
+  const editable =
+    letter.status === "回答案作成中" || letter.status === "差し戻し";
+
   return (
     <div className="space-y-3">
+      {letter.status === "差し戻し" && (
+        <div className="border border-rose-200 bg-rose-50 rounded-lg px-4 py-3">
+          <p className="text-xs font-medium text-rose-800">
+            広報課長から差し戻されました（{draft.returnedAt}）
+          </p>
+          {draft.returnReason && (
+            <p className="mt-1 text-xs text-rose-700 leading-relaxed">
+              理由：{draft.returnReason}
+            </p>
+          )}
+        </div>
+      )}
+
       <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
         <Badge tone="info">AI生成</Badge>
         <span className="tabular-nums">{draft.generatedAt}</span>
@@ -299,11 +321,11 @@ function DraftEditor({ letter }: { letter: Letter }) {
         rows={14}
         value={draftBody}
         onChange={(e) => setDraftBody(e.target.value)}
-        disabled={letter.status === "回答済" || letter.status === "決裁待ち"}
+        disabled={!editable}
         className="text-[13px]"
       />
 
-      {letter.status === "回答案作成中" && (
+      {editable && (
         <div className="flex flex-wrap gap-2">
           <Button
             variant="secondary"
