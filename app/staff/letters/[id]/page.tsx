@@ -278,11 +278,9 @@ function LetterDetail({ letter }: { letter: Letter }) {
 }
 
 function DraftEditor({ letter }: { letter: Letter }) {
-  const updateLetter = useStore((s) => s.updateLetter);
   const generateDraft = useStore((s) => s.generateDraft);
   const saveDraft = useStore((s) => s.saveDraft);
   const requestApproval = useStore((s) => s.requestApproval);
-  const sendReply = useStore((s) => s.sendReply);
 
   const draft = letter.draft!;
   const [draftBody, setDraftBody] = useState(draft.body);
@@ -338,26 +336,15 @@ function DraftEditor({ letter }: { letter: Letter }) {
         <div className="border border-amber-200 bg-amber-50 rounded-lg px-4 py-3">
           <p className="text-xs text-amber-800 leading-relaxed">
             広報課長の決裁待ちです（依頼日時：{draft.approvalRequestedAt}）。
-            デモでは下のボタンで決裁者の承認・送付を実行できます。
-          </p>
-          <div className="mt-3 flex gap-2">
-            <Button size="sm" onClick={() => sendReply(letter.id)}>
-              決裁して回答を送付
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() =>
-                updateLetter(
-                  letter.id,
-                  { status: "回答案作成中" },
-                  "決裁を差し戻し（回答案の修正へ）",
-                )
-              }
+            承認・差し戻しは
+            <Link
+              href="/staff/approvals"
+              className="font-medium underline hover:text-amber-900 mx-0.5"
             >
-              差し戻す
-            </Button>
-          </div>
+              決裁ページ
+            </Link>
+            から行えます。
+          </p>
         </div>
       )}
 
