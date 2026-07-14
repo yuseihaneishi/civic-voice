@@ -33,7 +33,7 @@ export function ToastViewport() {
         return (
           <div
             key={t.id}
-            className={`pointer-events-auto border ${tone} shadow-sm flex animate-[fadeIn_120ms_ease-out]`}
+            className={`pointer-events-auto border ${tone} rounded-lg overflow-hidden shadow-sm flex animate-[fadeIn_120ms_ease-out]`}
           >
             <div className={`w-1 ${accent}`} />
             <div className="flex-1 p-3 pr-8 relative">

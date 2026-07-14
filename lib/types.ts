@@ -1,104 +1,83 @@
-export type Channel = "メール" | "電話" | "窓口" | "Web" | "目安箱";
+export type Channel = "LINE" | "Webフォーム" | "メール" | "郵送";
 
 export type Department =
-  | "市民税課"
-  | "高齢福祉課"
-  | "道路維持課"
-  | "子育て支援課"
-  | "環境政策課"
-  | "観光振興課"
-  | "総務課";
+  | "健康医療福祉部"
+  | "子ども若者部"
+  | "教育委員会"
+  | "土木交通部"
+  | "琵琶湖環境部"
+  | "商工観光労働部"
+  | "防災危機管理局"
+  | "総合企画部";
 
 export type Category =
-  | "税"
-  | "暮らし"
-  | "福祉"
-  | "道路・交通"
+  | "医療・福祉"
   | "子育て・教育"
-  | "環境"
-  | "イベント・観光"
-  | "行政手続"
+  | "道路・交通"
+  | "環境・琵琶湖"
+  | "産業・観光"
+  | "防災・安全"
+  | "県政運営・手続"
   | "その他";
 
-export type IntakeStatus =
-  | "受付済"
-  | "確認中"
-  | "対応中"
-  | "対応完了"
-  | "保留";
+export type LetterStatus =
+  | "新着"
+  | "振り分け済"
+  | "回答案作成中"
+  | "決裁待ち"
+  | "回答済"
+  | "回答不要";
 
-export type Triage =
-  | "市政反映"
-  | "現場対応"
-  | "情報共有のみ"
-  | "対応不要";
+export type Priority = "高" | "中" | "低";
 
-export type Sentiment = "建設的" | "不満" | "情報提供" | "感謝";
+export type Sentiment = "要望" | "提案" | "不満" | "感謝";
 
-export type Comment = {
-  id: string;
+export type LogEntry = {
   at: string;
-  authorRole: "citizen" | "staff" | "mayor";
-  authorName: string;
-  body: string;
+  action: string;
+  by: string;
 };
 
-export type IssueStatus =
-  | "検討中"
-  | "上申済"
-  | "対応着手"
-  | "対応完了";
+export type ReplyDraft = {
+  body: string;
+  generatedAt: string;
+  generator: "AI" | "職員";
+  edited: boolean;
+  approvalRequestedAt?: string;
+  sentAt?: string;
+};
 
-export type Inquiry = {
+export type Letter = {
   id: string;
   receivedAt: string;
   channel: Channel;
-  citizenName: string;
-  citizenAge?: number;
-  citizenArea?: string;
+  senderName: string;
+  senderAgeGroup?: string;
+  senderArea?: string;
   body: string;
-  summary: string;
+  aiSummary: string;
+  aiPoints: string[];
+  sentiment: Sentiment;
+  /** AIによる振り分けの信頼度（0-100） */
+  aiConfidence: number;
   category: Category;
   department: Department;
-  status: IntakeStatus;
-  sentiment: Sentiment;
-  urgency: number;
-  importance: number;
-  triage: Triage;
-  relatedIssueIds: string[];
-  isException?: boolean;
-  staffNote?: string;
-  citizenId?: string;
+  priority: Priority;
+  replyRequired: boolean;
+  status: LetterStatus;
+  draft?: ReplyDraft;
+  log: LogEntry[];
   isFresh?: boolean;
-  comments?: Comment[];
 };
 
-export type Issue = {
+export type Theme = {
   id: string;
   title: string;
-  description: string;
   category: Category;
-  departments: Department[];
-  inquiryCount: number;
+  count: number;
   trend: "急増" | "増加" | "横ばい" | "減少";
-  urgency: number;
-  importance: number;
-  triage: Triage;
-  proposal: string;
-  citizenVoices: string[];
-  relatedIssueIds: string[];
   weeklySeries: number[];
-  status: IssueStatus;
-  decisionLog: { at: string; status: IssueStatus; note?: string }[];
-  comments?: Comment[];
-};
-
-export type CitizenDraft = {
-  category: Category;
-  title: string;
-  body: string;
-  wantsReply: boolean;
-  updatedAt: string;
+  sample: string;
 };
 
 export type Toast = {
@@ -108,24 +87,17 @@ export type Toast = {
   description?: string;
 };
 
-export type StaffFilters = {
+export type LetterFilters = {
   search: string;
+  category: "all" | Category;
   department: "all" | Department;
-  status: "all" | IntakeStatus;
+  status: "all" | LetterStatus;
   channel: "all" | Channel;
-  triage: "all" | Triage;
   sortBy: "date_desc" | "priority_desc";
 };
 
-export type Role = "citizen" | "staff" | "mayor";
-
-export type RoleProfile = {
-  role: Role;
-  label: string;
-  description: string;
-  signInLabel: string;
-  defaultId: string;
-  defaultName: string;
-  href: string;
-  bullets: string[];
+export type StaffProfile = {
+  name: string;
+  id: string;
+  section: string;
 };

@@ -3,9 +3,9 @@ import "./globals.css";
 import { ToastViewport } from "@/components/ui/Toast";
 
 export const metadata: Metadata = {
-  title: "市民の声プラットフォーム",
+  title: "知事への手紙 ブロードリスニング支援システム",
   description:
-    "市民からのご意見・ご要望を市政へ反映するための行政内向けプラットフォーム",
+    "LINE等経由で寄せられた県民の声の要約・振り分け・回答案作成を効率化する職員向けシステム",
 };
 
 export default function RootLayout({

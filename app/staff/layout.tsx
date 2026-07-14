@@ -1,20 +1,18 @@
 import { Header } from "@/components/ui/Header";
-import { roleProfiles } from "@/lib/seed";
+import { Sidebar } from "@/components/ui/Sidebar";
 
 export default function StaffLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const profile = roleProfiles.staff;
   return (
     <div className="flex-1 flex flex-col bg-slate-50">
-      <Header
-        role="staff"
-        userName={profile.defaultName}
-        userId={profile.defaultId}
-      />
-      {children}
+      <Header />
+      <div className="flex-1 flex">
+        <Sidebar />
+        <div className="flex-1 min-w-0">{children}</div>
+      </div>
     </div>
   );
 }

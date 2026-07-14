@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import type { LetterStatus, Priority } from "@/lib/types";
 
 type Tone =
   | "neutral"
@@ -30,7 +31,7 @@ export function Badge({
 }) {
   return (
     <span
-      className={`inline-flex items-center px-2 py-0.5 text-xs border whitespace-nowrap ${tones[tone]} ${className}`}
+      className={`inline-flex items-center px-2.5 py-0.5 text-xs border rounded-full whitespace-nowrap ${tones[tone]} ${className}`}
     >
       {children}
     </span>
@@ -38,43 +39,36 @@ export function Badge({
 }
 
 export function PriorityBadge({
-  label,
+  priority,
   className = "",
 }: {
-  label: "S" | "A" | "B" | "C";
+  priority: Priority;
   className?: string;
 }) {
   const tone =
-    label === "S"
+    priority === "高"
       ? "bg-rose-100 text-rose-800"
-      : label === "A"
+      : priority === "中"
         ? "bg-amber-100 text-amber-800"
-        : label === "B"
-          ? "bg-slate-100 text-slate-700"
-          : "bg-slate-50 text-slate-500";
+        : "bg-slate-100 text-slate-600";
   return (
     <span
-      className={`inline-flex items-center justify-center w-6 h-6 text-xs font-semibold ${tone} ${className}`}
+      className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-semibold ${tone} ${className}`}
     >
-      {label}
+      {priority}
     </span>
   );
 }
 
-export function StatusBadge({
-  status,
-}: {
-  status: string;
-}) {
-  const tone: Tone =
-    status === "対応完了"
-      ? "success"
-      : status === "対応中" || status === "対応着手"
-        ? "info"
-        : status === "保留"
-          ? "warn"
-          : status === "上申済"
-            ? "info"
-            : "neutral";
-  return <Badge tone={tone}>{status}</Badge>;
+const statusTones: Record<LetterStatus, Tone> = {
+  新着: "alert",
+  振り分け済: "neutral",
+  回答案作成中: "info",
+  決裁待ち: "warn",
+  回答済: "success",
+  回答不要: "muted",
+};
+
+export function StatusBadge({ status }: { status: LetterStatus }) {
+  return <Badge tone={statusTones[status]}>{status}</Badge>;
 }

@@ -18,7 +18,9 @@ export function Card({
   padded = true,
 }: CardProps) {
   return (
-    <section className={`border border-slate-200 bg-white ${className}`}>
+    <section
+      className={`border border-slate-200 bg-white rounded-xl overflow-hidden ${className}`}
+    >
       {(title || description || action) && (
         <header className="px-5 py-4 border-b border-slate-200 flex items-start justify-between gap-4">
           <div>
@@ -48,7 +50,7 @@ type StatProps = {
 
 export function Stat({ label, value, hint, trend }: StatProps) {
   return (
-    <div className="border border-slate-200 bg-white p-5">
+    <div className="border border-slate-200 bg-white rounded-xl p-5">
       <p className="text-xs text-slate-500">{label}</p>
       <p className="mt-2 text-2xl font-semibold text-slate-900 tabular-nums">
         {value}
@@ -120,7 +122,7 @@ export function EmptyState({
   action?: ReactNode;
 }) {
   return (
-    <div className="border border-dashed border-slate-300 bg-slate-50/50 p-10 text-center">
+    <div className="border border-dashed border-slate-300 bg-slate-50/50 rounded-xl p-10 text-center">
       <p className="text-sm font-medium text-slate-800">{title}</p>
       {description && (
         <p className="mt-1.5 text-xs text-slate-500 max-w-md mx-auto leading-relaxed">
