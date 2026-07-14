@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Badge, PriorityBadge, StatusBadge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import {
@@ -42,6 +42,18 @@ export default function LettersPage() {
   const setFilters = useStore((s) => s.setFilters);
   const resetFilters = useStore((s) => s.resetFilters);
   const simulateIncoming = useStore((s) => s.simulateIncoming);
+
+  const lastFetchAt = useStore((s) => s.lastFetchAt);
+  const [fetching, setFetching] = useState(false);
+
+  const handleFetch = () => {
+    if (fetching) return;
+    setFetching(true);
+    setTimeout(() => {
+      simulateIncoming();
+      setFetching(false);
+    }, 5000);
+  };
 
   const filtered = useMemo(() => {
     let list = [...letters];
@@ -92,9 +104,32 @@ export default function LettersPage() {
         title="手紙一覧"
         description="LINE等の経路を問わず、届いた手紙をAIが要約・振り分けした状態で一覧できます。"
         action={
-          <Button variant="secondary" onClick={() => simulateIncoming()}>
-            LINE受信をシミュレート
-          </Button>
+          <div className="text-right">
+            <Button
+              variant="secondary"
+              onClick={handleFetch}
+              disabled={fetching}
+              className="min-w-56"
+            >
+              {fetching ? (
+                <>
+                  <span
+                    className="inline-block w-4 h-4 border-2 border-blue-300 border-t-blue-700 rounded-full animate-spin"
+                    aria-hidden
+                  />
+                  取得中…
+                </>
+              ) : (
+                "LINEから最新の手紙を取得"
+              )}
+            </Button>
+            <p className="text-xs text-slate-500 mt-1.5 tabular-nums">
+              最終取得：
+              {hydrated && lastFetchAt
+                ? `${lastFetchAt}（手動）`
+                : "本日 08:00（自動）"}
+            </p>
+          </div>
         }
       />
 

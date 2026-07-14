@@ -13,6 +13,8 @@ type AppState = {
   /** AI回答案を生成中の手紙ID（演出用） */
   generatingId: string | null;
   incomingIndex: number;
+  /** 手動取得を最後に実行した日時（デモ用） */
+  lastFetchAt: string | null;
 
   updateLetter: (id: string, partial: Partial<Letter>, logAction?: string) => void;
   confirmTriage: (id: string) => void;
@@ -59,6 +61,7 @@ export const useStore = create<AppState>()(
       toasts: [],
       generatingId: null,
       incomingIndex: 0,
+      lastFetchAt: null,
 
       updateLetter: (id, partial, logAction) =>
         set((state) => ({
@@ -232,25 +235,28 @@ export const useStore = create<AppState>()(
 
       simulateIncoming: () => {
         const { incomingIndex, letters } = get();
+        const now = formatDateTime();
         const remaining = incomingPool.filter(
           (p) => !letters.some((l) => l.id === p.id),
         );
         if (remaining.length === 0) {
+          set({ lastFetchAt: now });
           get().pushToast({
-            tone: "warn",
-            title: "デモ用の新着はすべて受信済みです",
-            description: "「デモデータをリセット」で初期状態に戻せます",
+            tone: "info",
+            title: "新着の手紙はありませんでした",
+            description:
+              "デモ用の手紙はすべて取得済みです。「デモデータをリセット」で戻せます",
           });
           return;
         }
         const item = remaining[0];
         const created: Letter = {
           ...item,
-          receivedAt: formatDateTime(),
+          receivedAt: now,
           isFresh: true,
           log: [
             {
-              at: formatDateTime(),
+              at: now,
               action: "LINE経由で受信、AIが要約・振り分けを実行",
               by: "システム",
             },
@@ -259,10 +265,11 @@ export const useStore = create<AppState>()(
         set({
           letters: [created, ...letters],
           incomingIndex: incomingIndex + 1,
+          lastFetchAt: now,
         });
         get().pushToast({
           tone: "info",
-          title: "LINEで新しい手紙を受信しました",
+          title: "LINEから1件の手紙を取得しました",
           description: `AIが要約・振り分けを実行：${item.department}／優先度${item.priority}`,
         });
       },
@@ -288,6 +295,7 @@ export const useStore = create<AppState>()(
           toasts: [],
           generatingId: null,
           incomingIndex: 0,
+          lastFetchAt: null,
         }),
     }),
     {
@@ -296,6 +304,7 @@ export const useStore = create<AppState>()(
       partialize: (state) => ({
         letters: state.letters,
         incomingIndex: state.incomingIndex,
+        lastFetchAt: state.lastFetchAt,
       }),
     },
   ),
